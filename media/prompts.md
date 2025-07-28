@@ -1,13 +1,13 @@
 # Health Reflection Prompts
 
-## grounding
+## Chapter 1: grounding.
 Sit quietly and ground yourself before drawing.
 
-## landmark1
-Recall a past health feeling or memory. Draw what you feel.
+## Chapter 2: past landmark.
+Recall a past health feeling or memory. Draw what you feel, and add a date.
 
-## landmark2
-Focus on your current health sensation. Sketch what you notice.
+## Chapter 3: current landmark.
+Focus on your current health sensation. Sketch what you notice, and add today's date
 
-## optimal
-Imagine your optimal health state. Draw your wish.
+## Chapter 4: Optimal landmark.
+Imagine your optimal health state. Draw your wish. Add a follow-up date.
