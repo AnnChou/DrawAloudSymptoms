@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Draw-Aloud Symptom Synthesis</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script defer src="app.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    #wrapper { display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap; }
+    canvas { border: 1px solid #ccc; }
+    svg { background: #f9f9f9; border: 1px solid #ccc; }
+    textarea { width: 100%; max-width: 400px; margin-top: 10px; }
+    button { margin: 5px 0; display: block; }
+  </style>
+</head>
+<body>
+  <h1>Draw-Aloud Symptom Synthesis</h1>
+  <p>Move through health reflection prompts by drawing and writing. Drawing is tracked with a timeline and can be exported as a FHIR QuestionnaireResponse.</p>
+
+  <div id="wrapper">
+    <div>
+      <canvas id="drawing" width="400" height="400"></canvas>
+      <label for="brushColor">Brush Color:</label>
+      <input type="color" id="brushColor" value="#000000">
+      <br>
+      <label for="reflectionText">Reflection words:</label>
+      <textarea id="reflectionText" rows="2" placeholder="e.g., fatigue, open sky, clarity..."></textarea>
+      <br>
+      <button onclick="downloadImage()">Download PNG</button>
+      <button onclick="exportFHIR()">Export FHIR JSON</button>
+    </div>
+    <div>
+      <h3>Stroke Timeline</h3>
+      <svg id="timeline" width="400" height="100"></svg>
+    </div>
+  </div>
+</body>
+</html>
