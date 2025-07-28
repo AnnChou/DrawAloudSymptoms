@@ -40,3 +40,6 @@ Built using **Fabric.js** (freehand sketching) and **D3.js** (stroke timeline), 
 ├── LICENSE-media.txt     # CC BY-NC-ND 4.0 for media/prompts
 └── README.md
 
+---
+## live demo
+[https://annchou.github.io/DrawAloudSymptoms/src/](https://annchou.github.io/DrawAloudSymptoms/src/)
