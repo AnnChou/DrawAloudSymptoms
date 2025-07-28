@@ -1,0 +1,28 @@
+// Health Reflection Prompts
+{
+  "title": "Chapter 1: grounding.",
+  "description": "Sit quietly and ground yourself before drawing.",
+  "allowDraw": true,
+  "image": "images/calm-waters.jpg"
+}
+{
+  "title": "Chapter 2: past landmark",
+  "description": "Recall a past health feeling or memory. Draw what you feel, and add a date.",
+  "allowDraw": true,
+  "image": "images/calm-waters.jpg"
+}
+{
+  "title": "Chapter 3: current landmark",
+  "description": "Focus on your current health sensation. Sketch what you notice, and add today's date.",
+  "allowDraw": true,
+  "image": "images/calm-waters.jpg"
+}
+{
+  "title": "Chapter 4: Optimal landmark",
+  "description": "Imagine your optimal health state. Draw your wish. Add a follow-up date.",
+  "allowDraw": true,
+  "image": "images/calm-waters.jpg"
+}
+
+
+
