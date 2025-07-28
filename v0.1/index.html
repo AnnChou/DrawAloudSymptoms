@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fabric.js + D3 Timeline</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body { font-family: sans-serif; }
+    #wrapper { display: flex; flex-direction: row; gap: 20px; }
+    #drawing, #timeline { border: 1px solid #ccc; }
+    #timeline svg { background: #f9f9f9; }
+  </style>
+</head>
+<body>
+
+<h2>Draw-Aloud Health Timeline</h2>
+<div id="wrapper">
+  <canvas id="drawing" width="400" height="400"></canvas>
+  <div id="timeline">
+    <svg width="400" height="100"></svg>
+  </div>
+</div>
+
+<script>
+  // Set up Fabric.js
+  const canvas = new fabric.Canvas('drawing');
+  canvas.isDrawingMode = true;
+  canvas.freeDrawingBrush.color = "black";
+  canvas.freeDrawingBrush.width = 2;
+
+  // Stroke data to track timeline
+  const strokeData = [];
+
+  canvas.on('path:created', function(opt) {
+    const timestamp = new Date();
+    const path = opt.path;
+    path.set({ timestamp: timestamp });
+    
+    strokeData.push({ time: timestamp, label: `Stroke ${strokeData.length + 1}` });
+    updateTimeline(); // Draw D3 timeline
+  });
+
+  // Set up D3.js timeline
+  const svg = d3.select("#timeline svg");
+  const width = +svg.attr("width");
+  const height = +svg.attr("height");
+  const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+
+  function updateTimeline() {
+    svg.selectAll("*").remove();
+
+    const times = strokeData.map(d => d.time);
+    const x = d3.scaleTime()
+      .domain(d3.extent(times))
+      .range([margin.left, width - margin.right]);
+
+    svg.append("g")
+      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x).ticks(5).tickFormat(d3.timeFormat("%H:%M:%S")));
+
+    svg.selectAll("circle")
+      .data(strokeData)
+      .enter()
+      .append("circle")
+      .attr("cx", d => x(d.time))
+      .attr("cy", height / 2)
+      .attr("r", 6)
+      .attr("fill", "steelblue")
+      .append("title")
+      .text(d => `${d.label} @ ${d.time.toLocaleTimeString()}`);
+  }
+</script>
+
+</body>
+</html>
