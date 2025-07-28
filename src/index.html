@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Draw-Aloud Symptom Synthesis</title>
+  <meta name="description" content="A web-based health journaling app using drawing, reflection prompts, timeline tracking, and FHIR export. Built with Fabric.js and D3.js." />
+  <meta name="keywords" content="health, journaling, drawing, symptom, FHIR, timeline, canvas, fabric.js, d3.js, SNOMED-CT" />
+  <meta name="author" content="Ann Chou" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script defer src="app.js"></script>
+
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    #wrapper { display: flex; flex-wrap: wrap; gap: 20px; }
+    #leftPanel, #rightPanel { flex: 1 1 400px; min-width: 300px; }
+    canvas { border: 1px solid #ccc; }
+    svg { background: #f9f9f9; border: 1px solid #ccc; }
+    textarea { width: 100%; margin-top: 10px; resize: vertical; }
+    button { margin: 5px 5px 5px 0; }
+    #promptImage { max-width: 100%; height: auto; margin-top: 10px; border: 1px solid #ccc; }
+    label { font-weight: bold; margin-top: 10px; display: block; }
+    #dateInputs label { font-weight: normal; }
+  </style>
+</head>
+<body>
+
+  <h1>Draw-Aloud Symptom Synthesis</h1>
+  <p>Respond to four health reflection prompts by drawing, writing, and setting dates for key health landmarks. Export your work as a FHIR-compliant QuestionnaireResponse.</p>
+
+  <div id="wrapper">
+    <div id="leftPanel">
+      <h3 id="promptTitle"></h3>
+      <p id="promptDescription"></p>
+      <img id="promptImage" src="" alt="Prompt image" />
+
+      <canvas id="drawing" width="400" height="400"></canvas>
+
+      <div id="controls">
+        <label for="brushColor">Brush Color:</label>
+        <input type="color" id="brushColor" value="#000000">
+        <button onclick="undoLast()">Undo</button>
+        <button onclick="clearCanvas()">Clear</button>
+      </div>
+
+      <label for="reflectionText">Reflection words for this stage:</label>
+      <textarea id="reflectionText" rows="3" placeholder="e.g., fatigue, open sky, clarity..."></textarea>
+
+      <div id="dateInputs">
+        <label for="landmark1Date">Landmark 1 Date:</label>
+        <input type="date" id="landmark1Date" />
+        <label for="landmark2Date">Landmark 2 Date:</label>
+        <input type="date" id="landmark2Date" />
+      </div>
+
+      <div id="navigation" style="margin-top: 15px;">
+        <button id="prevPromptBtn">Previous</button>
+        <button id="nextPromptBtn">Next</button>
+      </div>
+
+      <div style="margin-top: 15px;">
+        <button onclick="downloadImage()">Download PNG</button>
+        <button onclick="exportFHIR()">Export FHIR JSON</button>
+      </div>
+    </div>
+
+    <div id="rightPanel">
+      <h3>Stroke Timeline</h3>
+      <svg id="timeline" width="400" height="120"></svg>
+    </div>
+  </div>
+
+</body>
+</html>
