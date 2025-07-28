@@ -9,6 +9,20 @@ document.getElementById('brushColor').addEventListener('change', function() {
   canvas.freeDrawingBrush.color = this.value;
 });
 
+document.getElementById('addReflectionToCanvas').addEventListener('click', function() {
+  const reflection = document.getElementById('reflectionText').value;
+  const text = new fabric.Text(reflection, {
+    left: 50,
+    top: 50,
+    fill: '#000',
+    fontSize: 20,
+    backgroundColor: '#fefcbf',
+    padding: 4,
+    cornerStyle: 'circle'
+  });
+  canvas.add(text);
+});
+
 // Load prompts from external JSON file (prompts.json)
 let prompts = [];
 let currentPrompt = 0;
@@ -62,10 +76,14 @@ function saveCurrentResponse() {
   const reflection = document.getElementById('reflectionText').value;
   const snomedConfirmed = document.getElementById('snomedConfirm').checked;
   const json = canvas.toJSON();
+  const dateInput = document.getElementById('dateInput');
+  const date = dateInput ? dateInput.value : '';
+
   responses[currentPrompt] = {
     prompt: prompts[currentPrompt].title,
     reflection,
     snomedConfirmed,
+    date,
     canvas: json
   };
 }
