@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Draw-Aloud Symptom Synthesis: Reflect on health with prompts, drawing, and timeline visualization." />
+  <title>Draw-Aloud Symptom Synthesis</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.2/d3.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1 id="promptTitle">Loading prompts...</h1>
+      <p id="promptDescription"></p>
+      <img id="promptImage" alt="Prompt image" style="max-width: 100%; display:none; margin: 10px 0;" />
+    </header>
+
+    <section id="drawingSection">
+      <canvas id="drawing" width="700" height="400" style="border:1px solid #ccc;"></canvas>
+
+      <div id="brushColorControls">
+        <label>Brush Colors:</label>
+        <button class="brushColorBtn" style="background:#000000;" data-color="#000000" aria-label="Black brush"></button>
+        <button class="brushColorBtn" style="background:#ff0000;" data-color="#ff0000" aria-label="Red brush"></button>
+        <button class="brushColorBtn" style="background:#008000;" data-color="#008000" aria-label="Green brush"></button>
+        <button class="brushColorBtn" style="background:#ffff00;" data-color="#ffff00" aria-label="Yellow brush"></button>
+        <input type="color" id="brushColor" title="Pick a custom brush color" />
+      </div>
+
+      <div class="controls">
+        <button onclick="undoLast()">Undo Last</button>
+        <button onclick="clearCanvas()">Clear Canvas</button>
+        <button onclick="downloadImage()">Download Drawing</button>
+      </div>
+
+      <div class="upload-prompt-image">
+        <label for="uploadPromptImage">Upload Prompt Image (overlay): </label>
+        <input type="file" id="uploadPromptImage" accept="image/*" />
+      </div>
+
+      <div class="reflection-input">
+        <label for="reflectionText">Reflection words:</label><br />
+        <textarea id="reflectionText" rows="3" cols="60" placeholder="Write your reflection here..."></textarea><br />
+        <button id="addReflectionToCanvas">Add Reflection to Canvas</button>
+      </div>
+
+      <div class="snomed-confirmation">
+        <input type="checkbox" id="snomedConfirm" />
+        <label for="snomedConfirm">Confirm SNOMED-CT matching reflection word</label>
+      </div>
+
+      <div class="date-input">
+        <label for="dateInput">Date (for landmark/follow-up):</label>
+        <input type="date" id="dateInput" />
+      </div>
+    </section>
+
+    <section id="navigation">
+      <button onclick="prevPrompt()">Previous</button>
+      <button onclick="nextPrompt()">Next</button>
+    </section>
+
+    <section id="timelineSection">
+      <h2>Timeline Overview</h2>
+      <svg id="timeline" width="700" height="120" style="border: 1px solid #ccc;"></svg>
+    </section>
+
+    <section id="exportSection">
+      <button onclick="exportFHIR()">Export All Data (FHIR JSON)</button>
+    </section>
+  </main>
+</body>
+</html>
