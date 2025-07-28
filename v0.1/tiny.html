@@ -1,0 +1,28 @@
+<!-- HTML -->
+<svg id="d3-canvas" width="600" height="400" style="border:1px solid #ccc;"></svg>
+
+<!-- JS -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const svg = d3.select("#d3-canvas");
+let currentLine, isDrawing = false;
+
+svg.on("mousedown", (event) => {
+  isDrawing = true;
+  const [x, y] = d3.pointer(event);
+  currentLine = svg.append("path")
+    .attr("d", `M${x},${y}`)
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+});
+
+svg.on("mousemove", (event) => {
+  if (!isDrawing) return;
+  const [x, y] = d3.pointer(event);
+  const d = currentLine.attr("d");
+  currentLine.attr("d", `${d} L${x},${y}`);
+});
+
+svg.on("mouseup", () => { isDrawing = false; });
+</script>
