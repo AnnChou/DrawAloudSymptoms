@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <title>Draw-Aloud Symptom Synthesis</title>
+  <meta name="description" content="A web-based health journaling app using drawing, reflection prompts, timeline tracking, and FHIR export. Built with Fabric.js and D3.js." />
+  <meta name="keywords" content="health, journaling, drawing, symptom, FHIR, timeline, canvas, fabric.js, d3.js, SNOMED-CT" />
+  <meta name="author" content="Ann Chou" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script defer src="app.js"></script>
@@ -12,25 +17,42 @@
     canvas { border: 1px solid #ccc; }
     svg { background: #f9f9f9; border: 1px solid #ccc; }
     textarea { width: 100%; max-width: 400px; margin-top: 10px; }
-    button { margin: 5px 0; display: block; }
+    button { margin: 5px 5px 5px 0; display: inline-block; }
+    #controls { margin-top: 10px; }
   </style>
 </head>
 <body>
   <h1>Draw-Aloud Symptom Synthesis</h1>
-  <p>Move through health reflection prompts by drawing and writing. Drawing is tracked with a timeline and can be exported as a FHIR QuestionnaireResponse.</p>
+  <p>Respond to four health reflection prompts by drawing and writing. Each stage is recorded on a timeline and can be exported as a FHIR-compliant QuestionnaireResponse with SNOMED-CT support.</p>
 
   <div id="wrapper">
     <div>
+      <h3 id="promptTitle">Stage 1: Grounding (No drawing)</h3>
+      <p id="promptDescription">Sit quietly and ground yourself before drawing.</p>
+
       <canvas id="drawing" width="400" height="400"></canvas>
-      <label for="brushColor">Brush Color:</label>
-      <input type="color" id="brushColor" value="#000000">
-      <br>
-      <label for="reflectionText">Reflection words:</label>
+
+      <div id="controls">
+        <label for="brushColor">Brush Color:</label>
+        <input type="color" id="brushColor" value="#000000">
+        <button onclick="undoLast()">Undo</button>
+        <button onclick="clearCanvas()">Clear</button>
+      </div>
+
+      <label for="reflectionText">Reflection words for this stage:</label>
       <textarea id="reflectionText" rows="2" placeholder="e.g., fatigue, open sky, clarity..."></textarea>
-      <br>
-      <button onclick="downloadImage()">Download PNG</button>
-      <button onclick="exportFHIR()">Export FHIR JSON</button>
+
+      <div id="navigation">
+        <button onclick="prevPrompt()">Previous</button>
+        <button onclick="nextPrompt()">Next</button>
+      </div>
+
+      <div>
+        <button onclick="downloadImage()">Download PNG</button>
+        <button onclick="exportFHIR()">Export FHIR JSON</button>
+      </div>
     </div>
+
     <div>
       <h3>Stroke Timeline</h3>
       <svg id="timeline" width="400" height="100"></svg>
