@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Draw-Aloud Symptom Synthesis Tool: Sketch your health story across four guided reflection stages, linked to a timeline and exported to FHIR-compliant data." />
+  <title>Draw-Aloud Symptom Synthesis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <section id="prompt-section">
+      <h2 id="promptTitle"></h2>
+      <p id="promptDescription"></p>
+      <img id="promptImage" style="display: none; max-width: 100%; height: auto;" />
+      <input type="file" id="uploadPromptImage" accept="image/*" />
+      <label for="dateInput">Date:</label>
+      <input type="date" id="dateInput" />
+    </section>
+
+    <section id="canvas-section">
+      <canvas id="drawing" width="800" height="400"></canvas>
+      <div class="tools">
+        <label for="brushColor">Brush Color:</label>
+        <input type="color" id="brushColor" value="#000000" />
+        <button onclick="clearCanvas()">Clear</button>
+        <button onclick="undoLast()">Undo</button>
+        <button onclick="downloadImage()">Save PNG</button>
+      </div>
+    </section>
+
+    <section id="reflection-section">
+      <textarea id="reflectionText" rows="3" placeholder="Enter reflection words..."></textarea>
+      <label><input type="checkbox" id="snomedConfirm" /> Confirm SNOMED matching</label>
+      <button id="addReflectionToCanvas">Add to Canvas</button>
+    </section>
+
+    <section id="timeline-section">
+      <svg id="timeline" width="1000" height="120"></svg>
+    </section>
+
+    <section id="navigation">
+      <button onclick="prevPrompt()">Previous</button>
+      <button onclick="nextPrompt()">Next</button>
+    </section>
+
+    <section id="export">
+      <button onclick="exportFHIR()">Export as FHIR JSON</button>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
