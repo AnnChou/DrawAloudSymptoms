@@ -11,30 +11,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script defer src="app.js"></script>
-
   <style>
     body { font-family: sans-serif; margin: 20px; }
-    #wrapper { display: flex; flex-wrap: wrap; gap: 20px; }
-    #leftPanel, #rightPanel { flex: 1 1 400px; min-width: 300px; }
+    #wrapper { display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap; }
     canvas { border: 1px solid #ccc; }
     svg { background: #f9f9f9; border: 1px solid #ccc; }
-    textarea { width: 100%; margin-top: 10px; resize: vertical; }
-    button { margin: 5px 5px 5px 0; }
-    #promptImage { max-width: 100%; height: auto; margin-top: 10px; border: 1px solid #ccc; }
-    label { font-weight: bold; margin-top: 10px; display: block; }
-    #dateInputs label { font-weight: normal; }
+    textarea { width: 100%; max-width: 400px; margin-top: 10px; }
+    button { margin: 5px 5px 5px 0; display: inline-block; }
+    #controls { margin-top: 10px; }
   </style>
 </head>
 <body>
-
   <h1>Draw-Aloud Symptom Synthesis</h1>
-  <p>Respond to four health reflection prompts by drawing, writing, and setting dates for key health landmarks. Export your work as a FHIR-compliant QuestionnaireResponse.</p>
+  <p>Respond to four health reflection prompts by drawing and writing. Each stage is recorded on a timeline and can be exported as a FHIR-compliant QuestionnaireResponse with SNOMED-CT support.</p>
 
   <div id="wrapper">
-    <div id="leftPanel">
-      <h3 id="promptTitle"></h3>
-      <p id="promptDescription"></p>
-      <img id="promptImage" src="" alt="Prompt image" />
+    <div>
+      <h3 id="promptTitle">Stage 1: Grounding (No drawing)</h3>
+      <p id="promptDescription">Sit quietly and ground yourself before drawing.</p>
 
       <canvas id="drawing" width="400" height="400"></canvas>
 
@@ -46,31 +40,27 @@
       </div>
 
       <label for="reflectionText">Reflection words for this stage:</label>
-      <textarea id="reflectionText" rows="3" placeholder="e.g., fatigue, open sky, clarity..."></textarea>
+      <textarea id="reflectionText" rows="2" placeholder="e.g., fatigue, open sky, clarity..."></textarea>
 
-      <div id="dateInputs">
-        <label for="landmark1Date">Landmark 1 Date:</label>
-        <input type="date" id="landmark1Date" />
-        <label for="landmark2Date">Landmark 2 Date:</label>
-        <input type="date" id="landmark2Date" />
+      <label>
+        <input type="checkbox" id="snomedConfirm"> I confirm my reflection words match the meaning of this prompt.
+      </label>
+
+      <div id="navigation">
+        <button onclick="prevPrompt()">Previous</button>
+        <button onclick="nextPrompt()">Next</button>
       </div>
 
-      <div id="navigation" style="margin-top: 15px;">
-        <button id="prevPromptBtn">Previous</button>
-        <button id="nextPromptBtn">Next</button>
-      </div>
-
-      <div style="margin-top: 15px;">
+      <div>
         <button onclick="downloadImage()">Download PNG</button>
         <button onclick="exportFHIR()">Export FHIR JSON</button>
       </div>
     </div>
 
-    <div id="rightPanel">
+    <div>
       <h3>Stroke Timeline</h3>
-      <svg id="timeline" width="400" height="120"></svg>
+      <svg id="timeline" width="400" height="100"></svg>
     </div>
   </div>
-
 </body>
 </html>
