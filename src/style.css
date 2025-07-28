@@ -1,0 +1,111 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: #f9f9f9;
+  color: #222;
+}
+
+main {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+header h1 {
+  margin-bottom: 5px;
+}
+
+#promptDescription {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+#brushColorControls {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brushColorBtn {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.brushColorBtn:hover,
+.brushColorBtn:focus {
+  border-color: #555;
+}
+
+#brushColor {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  vertical-align: middle;
+  border-radius: 4px;
+}
+
+.controls {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.upload-prompt-image {
+  margin: 15px 0;
+}
+
+.reflection-input {
+  margin: 15px 0;
+}
+
+.snomed-confirmation,
+.date-input {
+  margin: 10px 0;
+}
+
+#navigation {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+#navigation button {
+  padding: 8px 16px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+#timelineSection {
+  margin-top: 30px;
+}
+
+svg text.label {
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+svg text.reflection {
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+button {
+  background-color: #2a8bd8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 14px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+button:focus {
+  background-color: #1f6cb8;
+  outline: none;
+}
