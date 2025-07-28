@@ -32,7 +32,7 @@ let currentPrompt = 0;
 const responses = [];
 
 // Load prompts from prompts.json
-fetch('prompts.json')
+fetch('media/prompts.json')
   .then(response => response.json())
   .then(data => {
     prompts = data;
