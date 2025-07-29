@@ -1,0 +1,9 @@
+
+{
+  "emotional": ["hope", "fear", "grief", "joy"],
+  "medical": ["pain", "fatigue", "fever", "dizziness"],
+  "sensory": ["tingle", "numbness", "itchy", "burning"],
+  "bodyParts": ["head", "chest", "abdomen", "legs", "arms"],
+  "progress": ["stable", "improving", "worsening"],
+  "social": ["family", "work", "community"]
+}
