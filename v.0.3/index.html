@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Draw-Aloud Health Reflection</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Draw-Aloud Health Reflection</h1>
+    <div id="promptSection">
+      <h2 id="promptTitle"></h2>
+      <p id="promptDescription"></p>
+      <img id="promptImage" alt="Prompt" style="max-width: 100%; display: none" />
+    </div>
+
+    <canvas id="drawing" width="800" height="400"></canvas>
+    <div id="brushControls">
+      <label>Brush:</label>
+      <button class="brushColor" data-color="black">Black</button>
+      <button class="brushColor" data-color="red">Red</button>
+      <button class="brushColor" data-color="green">Green</button>
+      <button class="brushColor" data-color="yellow">Yellow</button>
+      <input type="color" id="customColor" />
+    </div>
+
+    <textarea id="reflectionText" placeholder="Type your reflection here..."></textarea>
+    <input type="date" id="dateInput" />
+
+    <div id="tagSection">
+      <label><input type="checkbox" id="tagOptIn" /> Suggest tags (optional)</label>
+      <div id="tagOptions" style="display:none">
+        <h4>Optional Tags</h4>
+        <div id="suggestedTags"></div>
+        <label>Progress:
+          <select id="progressTag">
+            <option value="">-- Select --</option>
+            <option>Stable</option>
+            <option>Improving</option>
+            <option>Worsening</option>
+          </select>
+        </label>
+        <label>Social/Family Goal:
+          <input type="text" id="socialGoal" placeholder="e.g. Spend more time with family" />
+        </label>
+        <label>Body Part:
+          <select id="bodyPart">
+            <option value="">-- Select --</option>
+            <option>Head</option>
+            <option>Chest</option>
+            <option>Stomach</option>
+            <option>Legs</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="addReflectionToCanvas">Add Reflection to Canvas</button>
+      <button onclick="prevPrompt()">&larr; Prev</button>
+      <button onclick="nextPrompt()">Next &rarr;</button>
+    </div>
+
+    <div id="timeline"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-database-compat.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
