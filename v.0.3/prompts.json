@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Chapter 1: Grounding",
+    "description": "Sit quietly and ground yourself before drawing.",
+    "allowDraw": false,
+    "image": "images/grounding.jpg"
+  },
+  {
+    "title": "Chapter 2: Past Landmark",
+    "description": "Recall a past health feeling or memory. Draw what you feel, and add a date.",
+    "allowDraw": true,
+    "image": "images/past.jpg"
+  },
+  {
+    "title": "Chapter 3: Current Landmark",
+    "description": "Focus on your current health sensation. Sketch what you notice, and add today's date.",
+    "allowDraw": true,
+    "image": "images/current.jpg"
+  },
+  {
+    "title": "Chapter 4: Optimal Hope",
+    "description": "Imagine your optimal health state. Draw your wish. Add a follow-up date.",
+    "allowDraw": true,
+    "image": "images/future.jpg"
+  }
+]
